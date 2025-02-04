@@ -1,0 +1,13 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: WebAppLambda
+        Alias: Prod
+        CurrentVersion: !GetAtt WebAppFunction.Version
+        TrafficRoutingConfig:
+          Type: TimeBasedCanary
+          TimeBasedCanary:
+            Percentage: 10
+            Interval: 5
