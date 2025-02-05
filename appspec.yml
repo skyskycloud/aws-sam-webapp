@@ -4,6 +4,6 @@ resources:
       Type: AWS::Lambda::Function
       properties:
         name: WebAppLambda
-        alias: Prod3
+        alias: Prodnew
         currentversion: 2
         targetversion: 3
