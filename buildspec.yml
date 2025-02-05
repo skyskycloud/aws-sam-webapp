@@ -10,13 +10,14 @@ phases:
   build:
     commands:
       - echo "Zipping deployment package..."
-      - cd backend && zip -r ../deployment.zip . && cd ..
+      - zip -r deployment.zip backend/ scripts/ appspec.yml
 
   post_build:
     commands:
       - echo "Uploading to S3..."
       - aws s3 cp deployment.zip s3://demo-09/
       - echo "Build artifact uploaded."
+
 artifacts:
   files:
     - deployment.zip
