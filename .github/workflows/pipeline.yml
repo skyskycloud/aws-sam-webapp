@@ -1,0 +1,29 @@
+name: Deploy SAM Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: AKIA3RYC5YSLFYL5QWNY
+          aws-secret-access-key: 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
+          aws-region: us-east-1
+
+      - name: Install AWS SAM CLI
+        run: |
+          pip install aws-sam-cli
+
+      - name: Build and Deploy
+        run: |
+          sam build
+          sam deploy --stack-name demo9 --resolve-s3 --capabilities CAPABILITY_IAM
